@@ -13,6 +13,15 @@ export class SpendingService {
 
   readonly allSpendings = this.spendings.asReadonly();
 
+  readonly categories = signal<string[]>([
+    'Food',
+    'Transport',
+    'Entertainment',
+    'Utilities',
+    'Shopping',
+    'Other',
+  ]);
+
   readonly totalSpent = computed(() => this.spendings().reduce((sum, s) => sum + s.amount, 0));
 
   addSpending(spending: Omit<Spending, 'id'>): void {
@@ -25,5 +34,11 @@ export class SpendingService {
 
   deleteSpending(id: string): void {
     this.spendings.update((current) => current.filter((s) => s.id !== id));
+  }
+
+  addCategory(category: string): void {
+    if (category && !this.categories().includes(category)) {
+      this.categories.update((current) => [...current, category]);
+    }
   }
 }

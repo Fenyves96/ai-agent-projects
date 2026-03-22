@@ -44,10 +44,28 @@
           (ngModelChange)="category.set($event)"
           name="category"
         >
-          @for (cat of categories; track cat) {
+          @for (cat of categories(); track cat) {
             <option [value]="cat">{{ cat }}</option>
           }
         </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="newCategory" class="form-label">Add New Category</label>
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            id="newCategory"
+            [ngModel]="newCategory()"
+            (ngModelChange)="newCategory.set($event)"
+            name="newCategory"
+            placeholder="New category name"
+          />
+          <button type="button" class="btn btn-outline-secondary" (click)="addCategory()">
+            Add
+          </button>
+        </div>
       </div>
 
       <div class="mb-3">

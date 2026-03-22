@@ -18,8 +18,18 @@ export class AddSpendingComponent {
   amount = signal<number>(0);
   category = signal('Food');
   date = signal(new Date().toISOString().split('T')[0]);
+  newCategory = signal('');
 
-  readonly categories = ['Food', 'Transport', 'Entertainment', 'Utilities', 'Shopping', 'Other'];
+  readonly categories = this.spendingService.categories;
+
+  addCategory(): void {
+    const newCat = this.newCategory().trim();
+    if (newCat) {
+      this.spendingService.addCategory(newCat);
+      this.category.set(newCat);
+      this.newCategory.set('');
+    }
+  }
 
   addSpending(): void {
     if (!this.title() || this.amount() <= 0) {
