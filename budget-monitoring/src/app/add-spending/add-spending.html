@@ -1,1 +1,72 @@
-<p>add-spending works!</p>
+<div class="container py-5">
+  <h1 class="mb-4">Add New Spending</h1>
+
+  <form (ngSubmit)="addSpending()" class="card">
+    <div class="card-body">
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          [ngModel]="title()"
+          (ngModelChange)="title.set($event)"
+          name="title"
+          placeholder="e.g., Groceries"
+          required
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="amount" class="form-label">Amount</label>
+        <div class="input-group">
+          <span class="input-group-text">$</span>
+          <input
+            type="number"
+            class="form-control"
+            id="amount"
+            [ngModel]="amount()"
+            (ngModelChange)="amount.set(+$event)"
+            name="amount"
+            min="0"
+            step="0.01"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="category" class="form-label">Category</label>
+        <select
+          class="form-select"
+          id="category"
+          [ngModel]="category()"
+          (ngModelChange)="category.set($event)"
+          name="category"
+        >
+          @for (cat of categories; track cat) {
+            <option [value]="cat">{{ cat }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="date" class="form-label">Date</label>
+        <input
+          type="date"
+          class="form-control"
+          id="date"
+          [ngModel]="date()"
+          (ngModelChange)="date.set($event)"
+          name="date"
+          required
+        />
+      </div>
+
+      <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-primary">Add Spending</button>
+        <a href="/" class="btn btn-outline-secondary">Cancel</a>
+      </div>
+    </div>
+  </form>
+</div>
