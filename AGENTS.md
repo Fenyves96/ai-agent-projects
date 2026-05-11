@@ -54,3 +54,7 @@ ng test              # Vitest via Angular CLI
 - **Contevent purpose**: An application that helps people get to know each other based on common activities or events. For example, if someone has no company for playing darts, they can add an event in the app. People can apply for this event, and the user can accept or deny the application. Groups of users and companies can also create events. Users can find and apply for these events and form groups.
 - No CI/CD, no GitHub Actions, no Docker config.
 - contevent-backend has **no `.gitignore`** — `target/` and IDE files should be excluded.
+
+## Workflow rules
+
+- **Never commit changes automatically** — only commit when explicitly asked by the user, even in Build mode.
