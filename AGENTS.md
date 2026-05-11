@@ -51,5 +51,6 @@ ng test              # Vitest via Angular CLI
 - **budget-monitoring** has 2 routes (`/` → Landing, `/add-spending` → AddSpending), uses Angular signals for in-memory state (`SpendingService`).
 - **contevent-backend** is an empty Spring Boot app (no controllers yet), HTTP on port 8080.
 - **contevent-frontend** has no routes, just a shell component.
+- **Contevent purpose**: An application that helps people get to know each other based on common activities or events. For example, if someone has no company for playing darts, they can add an event in the app. People can apply for this event, and the user can accept or deny the application. Groups of users and companies can also create events. Users can find and apply for these events and form groups.
 - No CI/CD, no GitHub Actions, no Docker config.
 - contevent-backend has **no `.gitignore`** — `target/` and IDE files should be excluded.
