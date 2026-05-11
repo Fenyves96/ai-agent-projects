@@ -1,0 +1,60 @@
+<h2>Create Event</h2>
+
+<form #form="ngForm" (ngSubmit)="submit()">
+  @if (error()) {
+    <div class="error">{{ error() }}</div>
+  }
+
+  <label>
+    Title *
+    <input name="title" [(ngModel)]="model.title" required />
+  </label>
+
+  <label>
+    Description
+    <textarea name="description" [(ngModel)]="model.description" rows="3"></textarea>
+  </label>
+
+  <label>
+    Category
+    <input name="category" [(ngModel)]="model.category" placeholder="e.g. sports, music" />
+  </label>
+
+  <label>
+    Date & Time *
+    <input name="dateTime" type="datetime-local" [(ngModel)]="model.dateTime" required />
+  </label>
+
+  <label>
+    Location
+    <input name="location" [(ngModel)]="model.location" />
+  </label>
+
+  <label>
+    Max Participants *
+    <input name="maxParticipants" type="number" [(ngModel)]="model.maxParticipants" required min="1" />
+  </label>
+
+  <fieldset>
+    <legend>Creator</legend>
+    <label>
+      ID
+      <input name="creatorId" type="number" [(ngModel)]="model.creatorId!" />
+    </label>
+    <label>
+      Type
+      <select name="creatorType" [(ngModel)]="model.creatorType">
+        <option value="USER">User</option>
+        <option value="GROUP">Group</option>
+        <option value="COMPANY">Company</option>
+      </select>
+    </label>
+  </fieldset>
+
+  <div class="actions">
+    <button type="submit" [disabled]="submitting() || form.invalid">
+      {{ submitting() ? 'Creating...' : 'Create Event' }}
+    </button>
+    <a routerLink="/events" class="btn btn-secondary">Cancel</a>
+  </div>
+</form>

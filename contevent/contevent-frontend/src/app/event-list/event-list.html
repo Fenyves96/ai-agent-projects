@@ -1,0 +1,32 @@
+<h2>Events</h2>
+
+@if (loading()) {
+  <p class="loading">Loading events...</p>
+} @else if (events().length === 0) {
+  <p class="empty">No events yet.</p>
+} @else {
+  <div class="event-grid">
+    @for (event of events(); track event.id) {
+      <div class="event-card">
+        <div class="card-header">
+          <span class="status" [class]="event.status">{{ event.status }}</span>
+          @if (event.category) {
+            <span class="category">{{ event.category }}</span>
+          }
+        </div>
+        <h3>{{ event.title }}</h3>
+        @if (event.description) {
+          <p class="description">{{ event.description }}</p>
+        }
+        <div class="meta">
+          <span>📅 {{ event.dateTime | date:'medium' }}</span>
+          @if (event.location) {
+            <span>📍 {{ event.location }}</span>
+          }
+          <span>👥 {{ event.maxParticipants }} max</span>
+        </div>
+        <a [routerLink]="['/events', event.id]" class="btn btn-small">Details</a>
+      </div>
+    }
+  </div>
+}

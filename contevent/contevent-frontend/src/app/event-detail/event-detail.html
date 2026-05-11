@@ -1,0 +1,55 @@
+@if (loading()) {
+  <p class="loading">Loading...</p>
+} @else {
+  @let evt = event();
+  @if (evt) {
+    <div class="detail">
+      <a routerLink="/events" class="back">&larr; Back to events</a>
+
+      <div class="header">
+        <h2>{{ evt.title }}</h2>
+        <span class="status" [class]="evt.status">{{ evt.status }}</span>
+      </div>
+
+      @if (evt.description) {
+        <p class="description">{{ evt.description }}</p>
+      }
+
+      <div class="meta">
+        <div><strong>Category:</strong> {{ evt.category || '—' }}</div>
+        <div><strong>Date:</strong> {{ evt.dateTime | date:'fullDate' }} {{ evt.dateTime | date:'shortTime' }}</div>
+        <div><strong>Location:</strong> {{ evt.location || '—' }}</div>
+        <div><strong>Max participants:</strong> {{ evt.maxParticipants }}</div>
+        <div><strong>Creator:</strong> {{ evt.creatorType }} #{{ evt.creatorId }}</div>
+      </div>
+
+      <button class="btn" (click)="apply()">Apply to this event</button>
+
+      <h3>Applications ({{ applications().length }})</h3>
+
+      @if (applications().length === 0) {
+        <p class="empty">No applications yet.</p>
+      } @else {
+        <div class="app-list">
+          @for (app of applications(); track app.id) {
+            <div class="app-card">
+              <span class="app-status" [class]="app.status">{{ app.status }}</span>
+              <span>Applicant #{{ app.applicantId }}</span>
+              @if (app.message) {
+                <p class="app-message">{{ app.message }}</p>
+              }
+              @if (app.status === 'PENDING') {
+                <div class="app-actions">
+                  <button class="btn btn-small btn-accept" (click)="accept(app.id)">Accept</button>
+                  <button class="btn btn-small btn-deny" (click)="deny(app.id)">Deny</button>
+                </div>
+              }
+            </div>
+          }
+        </div>
+      }
+    </div>
+  } @else {
+    <p class="loading">Event not found.</p>
+  }
+}

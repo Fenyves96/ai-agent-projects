@@ -74,6 +74,26 @@ paths:
           description: Event not found
 
   /events/{eventId}/applications:
+    get:
+      operationId: getApplications
+      summary: List applications for an event
+      tags: [Applications]
+      parameters:
+        - name: eventId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: A list of applications
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Application'
     post:
       operationId: applyToEvent
       summary: Apply to join an event
